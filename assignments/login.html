@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <style>
+        .center-it {
+            display: flex;
+            justify-content: center;
+            /* x-axis  */
+            align-items: center;
+            /* y-axis  */
+        }
+
+        * {
+            color: rgb(61, 64, 72);
+        }
+
+        body {
+            background-color: rgb(218, 227, 238);
+        }
+
+        form {
+            padding: 50px;
+            background-color: rgb(172, 177, 183);
+            border-radius: 15px;
+            box-shadow: 5px 5px 30px rgb(65, 75, 80);
+        }
+
+        form:hover {
+            box-shadow: 15px 15px 40px rgb(65, 75, 80);
+        }
+
+        input {
+            margin-top: 10px;
+            width: 400px;
+            height: 25px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgb(218, 227, 238);
+        }
+
+        button {
+            height: 30px;
+            width: 70px;
+            border-radius: 5px;
+            background-color: rgb(7, 51, 78);
+            color: aliceblue;
+        }
+
+        a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center-it" style="margin-top: 120px;">
+        <h1>Welcome User!</h1>
+    </div>
+    <div class="center-it">
+        <form action="" method="post">
+            <div>
+                <label for="username">Username/Email:</label> <br />
+                <input type="text" name="username" id="username" />
+            </div>
+            <br />
+            <div>
+                <label for="password">Password:</label> <br />
+                <input type="text" name="password" id="password" />
+            </div>
+            <div style="display: flex; justify-content: right;">
+                <a style="font-size: 14px; margin-top: 5px;">Forgot Password?</a>
+            </div>
+            <br />
+            <button type="submit">Login</button>
+            <div style="display: flex; justify-content: center;">
+                <a style="font-size: 14px; margin-top: 10px;">Don't have an account? Create One</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

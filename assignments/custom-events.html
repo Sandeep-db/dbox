@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Events</title>
+    <style>
+        .button {
+            width: 150px;
+            height: 50px;
+            background-color: rgb(39, 39, 70);
+            color: aliceblue;
+            border: none;
+            font-size: x-large;
+            font-family: 'Courier New', Courier, monospace;
+            border-radius: 10px;
+            box-shadow: 0px 0px 50px rgb(65, 75, 80);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1>Custom Events</h1>
+        <div>
+            <button class="button">Click me</button>
+        </div>
+    </center>
+    <script>
+        const customEvent = new Event("myEvent")
+
+        document.addEventListener("myEvent", function () {
+            alert("myEvent")
+        })
+
+        // document.querySelector(".button").addEventListener("click", function () {
+        //     document.dispatchEvent(customEvent)
+        // })
+
+        for (let i = 0; i < 10; ++i) {
+            console.log(i)
+            if (i == 5)
+                document.dispatchEvent(customEvent)
+        }
+    </script>
+</body>
+
+</html>

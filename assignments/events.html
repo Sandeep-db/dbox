@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <style>
+        body {
+            margin-top: 200px;
+        }
+
+        .button {
+            width: 150px;
+            height: 50px;
+            background-color: rgb(39, 39, 70);
+            color: aliceblue;
+            border: none;
+            font-size: x-large;
+            font-family: 'Courier New', Courier, monospace;
+            border-radius: 10px;
+            box-shadow: 0px 0px 50px rgb(65, 75, 80);
+            cursor: pointer;
+        }
+
+        div {
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div>
+            <button class="button">Click me</button>
+        </div>
+        <div>
+            <img src="../images/demo-wall.jpeg" alt="Some Image">
+        </div>
+        <div>
+            <button class="btn" name="Button 1">Button 1</button>
+            <button class="btn" name="Button 2">Button 2</button>
+            <button class="btn" name="Button 3">Button 3</button>
+            <button class="btn" name="Button 4">Button 4</button>
+            <button class="btn" name="Button 5">Button 5</button>
+            <button class="btn" name="Button 6">Button 6</button>
+            <button class="btn" name="Button 7">Button 7</button>
+            <button class="btn" name="Button 8">Button 8</button>
+            <button class="btn" name="Button 9">Button 9</button>
+        </div>
+    </center>
+    <script>
+
+        let index = 0
+        const button = document.querySelector(".button")
+        paths = [
+            "../images/demo-wall.jpeg",
+            "../images/img-reload.jpeg",
+            "../images/img-l2.jpeg"
+        ]
+
+        button.addEventListener('click', event => {
+            index = 1 - index
+            // index = (index + 1) % paths.length
+            document.querySelector("img").src = paths[index]
+        })
+
+        const btns = document.querySelectorAll(".btn")
+
+        btns.forEach(element => {
+            element.addEventListener('click', function(event) {
+                window.alert(event.target.innerHTML)
+            })
+        })
+
+    </script>
+</body>
+
+</html>

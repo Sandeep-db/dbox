@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax All</title>
+</head>
+
+<body>
+    <script>
+        function ajaxGet() {
+            var x = {}
+            const api_url = "https://reqres.in/api/users"
+            const imdb_url = "http://api-fulfill.dataexchange.us-east-1.amazonaws.com/v1"
+            var xhttp = new XMLHttpRequest()
+            xhttp.open("GET", imdb_url, true);
+            xhttp.send();
+            xhttp.onload = function () {
+                x = JSON.parse(this.responseText);
+                console.log(x)
+            }
+        }
+        ajaxGet()
+
+        function ajaxPost() {
+            var x = {}
+            const api_url = "https://reqres.in/api/users"
+            var xhttp = new XMLHttpRequest()
+            xhttp.open("POST", api_url, true);
+            xhttp.send({
+                name: "Sandyblaze",
+                job: "Demon King"
+            });
+            xhttp.onload = function () {
+                x = JSON.parse(this.responseText);
+                console.log(x)
+            }
+        }
+        ajaxPost()
+
+        function ajaxPut() {
+            var x = {}
+            const api_url = "https://reqres.in/api/users/3"
+            var xhttp = new XMLHttpRequest()
+            xhttp.open("PUT", api_url, true);
+            xhttp.send({
+                name: "Sandyblaze",
+                job: "Demon King"
+            });
+            xhttp.onload = function () {
+                x = JSON.parse(this.responseText);
+                console.log(x)
+            }
+        }
+        ajaxPut()
+    </script>
+</body>
+
+</html>

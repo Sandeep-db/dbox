@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid</title>
+</head>
+<center>
+    <select name="countries" id="countries" class="countries">
+        <option value="">Select Country</option>
+    </select>
+</center>
+
+<body>
+    <script>
+        function ajaxGet(url) {
+            var x = {}
+            const xhttp = new XMLHttpRequest()
+            xhttp.open("GET", url)
+            xhttp.send()
+            xhttp.onload = function () {
+                x = JSON.parse(this.responseText)
+                // console.log(x)
+                return x
+            }
+        }
+
+        function onLoad() {
+            var select = document.querySelector('.countries')
+            select.addEventListener('onchange', function(event) => {
+                getCovidCounts(event.target.value, event.target.text)
+            })
+
+
+            const url = "https:api.covid19api.com/countries"
+            const xhttp = new XMLHttpRequest()
+            xhttp.open("GET", url)
+            xhttp.send()
+            xhttp.onload = function () {
+                const countries = JSON.parse(this.responseText)
+                countries.forEach(country => {
+                    var option = document.createElement("option")
+                    option.value = country.IS02
+                    option.text = country.Country
+                    select.appendChild(option)
+                })
+            }
+        }
+
+        function getCovidCounts() {
+
+        }
+
+        window.onload = onLoad
+        ajaxGet("https:api.covid19api.com/country/IN")
+    </script>
+</body>
+
+</html>

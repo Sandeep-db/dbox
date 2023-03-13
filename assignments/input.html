@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        .center-it {
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            /* x-axis  */
+            align-items: center;
+            /* y-axis  */
+        }
+
+        .space-around-10 {
+            padding: 10px;
+        }
+
+        .space-around-5 {
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="space-around-10">
+        <label for="username" class="space-around-5">UserName: </label>
+        <input type="text" id="username" class="space-around-5" placeholder="Username" />
+    </div>
+    <div class="space-around-10">
+        <label for="email" class="space-around-5">Email: </label>
+        <input type="email" id="email" class="space-around-5" placeholder="Email" />
+    </div>
+    <div class="space-around-10">
+        <label for="age" class="space-around-5">Age: </label>
+        <input type="number" id="age" class="space-around-5" min="0" max="100" placeholder="Age" />
+    </div>
+    <div class="space-around-10">
+        <input type="checkbox" id="theta" class="space-around-5" />
+        <label for="theta">Theta</label>
+    </div>
+    <div class="space-around-10">
+        <p>Gender</p>
+        <input type="radio" name="gender" id="male" class="space-around-5" />
+        <label for="male">Male</label>
+        <input type="radio" name="gender" id="female" class="space-around-5" />
+        <label for="female">Female</label>
+    </div>
+    <div class="space-around-10">
+        <label for="price">Price range: </label>
+        <input type="range" id="price" min="0" max="1000" class="space-around-5" />
+    </div>
+    <div class="space-around-10">
+        <label for="time">Time: </label>
+        <input type="time" id="time" class="space-around-5" />
+    </div>
+    <div class="space-around-10">
+        <label for="date">Date: </label>
+        <input type="date" id="date" class="space-around-5" />
+    </div>
+    <div class="space-around-10">
+        <label for="color">Color: </label>
+        <input type="color" id="color" class="space-around-5" />
+    </div>
+    <div class="space-around-10">
+        <label for="country" class="space-around-5">Country: </label>
+        <select name="country" id="country">
+            <option value="">Select Country</option>
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+        </select>
+    </div>
+    <div class="space-around-10">
+        <label for="address" class="space-around-5">Address: </label>
+        <textarea name="address" id="address" cols="30" rows="10" placeholder="Address"></textarea>
+    </div>
+
+    <form action="" method="" enctype="text/plain"></form>
+    <form action="" method="" enctype="multipart/form-data"></form>
+    <form action="" method="" enctype="application/x-www-form-urlencoded"></form>
+
+</body>
+
+</html>

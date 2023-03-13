@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        .card {
+            width: 200px;
+            box-shadow: 0px 0px 15px rgb(65, 75, 80);
+            margin: 20px;
+        }
+
+        .outer {
+            display: flex;
+            justify-content: center;
+        }
+
+        .cont {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cont">
+    </div>
+    <!-- <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            Featured
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">An item</li>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item">A third item</li>
+        </ul>
+    </div> -->
+    <script>
+        var x = {}
+        // const api_url = "https://jsonplaceholder.typicode.com/users"
+        const api_url = "https://reqres.in/api/users"
+        function loadDoc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                x = JSON.parse(this.responseText);
+                console.log(x)
+                var cont = document.querySelector('.cont')
+                for (const person of x.data) {
+                    // let outer = document.createElement("div")
+                    // outer.className = "outer"
+                    let element = document.createElement("div")
+                    element.className = "card"
+                    element.style = "width: 18rem;"
+                    let card_header = document.createElement("div")
+                    card_header.className = "card-header"
+                    card_header.innerText = "Features"
+                    let ul = document.createElement("ul")
+                    ul.className = "list-group list-group-flush"
+                    for (const k in person) {
+                        let li = document.createElement("li")
+                        li.className = "list-group-item"
+                        if (k == 'avatar') {
+                            var img = document.createElement("img")
+                            img.src = person[k]
+                            img.style = "width: 100%"
+                            li.appendChild(img)
+                        } else {
+                            li.innerText = person[k]
+                        }
+                        ul.appendChild(li)
+                    }
+                    element.appendChild(card_header)
+                    element.appendChild(ul)
+                    // outer.appendChild(element)
+                    // cont.appendChild(outer)
+                    cont.appendChild(element)
+                }
+            }
+            xhttp.open("GET", api_url, true);
+            xhttp.send();
+        }
+        loadDoc()
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

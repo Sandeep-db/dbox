@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List elements</title>
+</head>
+
+<body>
+    <center>
+        <ul>
+            <li>List Element 1</li>
+            <li>List Element 2</li>
+            <li>List Element 3</li>
+            <li>List Element 4</li>
+            <li>List Element 5</li>
+            <li>List Element 6</li>
+            <li>List Element 7</li>
+            <li>List Element 8</li>
+            <li>List Element 9</li>
+        </ul>
+        <input id="button" type="button" value="Change">
+    </center>
+</body>
+
+</html>
+
+<script>
+
+    const button = document.querySelector("#button")
+
+    button.addEventListener("click", function () {
+        var arr = document.querySelectorAll('li')
+        let n = arr.length - 1
+        arr[Math.floor(Math.random() * n)].innerText = "changed Text"
+    })
+
+</script>

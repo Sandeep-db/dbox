@@ -1,0 +1,17 @@
+BOM 
+window
+    1) location 
+    2) history 
+    3) screen 
+    4) navigation 
+    5) document 
+    6) alert 
+    7) onblur
+
+DOM 
+    1) anchor 
+    2) heading 
+
+DOM methods 
+    1) querySelector()
+    2) querySelectorAll()
