@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS - Basics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        body {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <form name="product-form" class="col-lg-4 col-md-8 col-sm-12 pform">
+            <div>
+                <input type="text" class="form-control my-2" name="cat" placeholder="Product Catagory">
+            </div>
+            <div>
+                <input type="text" class="form-control my-2" name="subcat" placeholder="Product Sub Catagory">
+            </div>
+            <div>
+                <input type="text" class="form-control my-2" name="name" placeholder="Product Name">
+            </div>
+            <div>
+                <input type="number" class="form-control my-2" name="price" placeholder="Product Price">
+            </div>
+            <div>
+                <input type="number" class="form-control my-2" name="discount" placeholder="Product Discount">
+            </div>
+            <div>
+                <input type="button" class="btn btn-warning mt-4" value="Add Item" onclick="addProduct()">
+            </div>
+        </form>
+        <div class="mt-5">
+            <select name="cat" id="cat" onchange="changeSub(value)">
+                <option value="">Select Catagory</option>
+            </select>
+            <select name="sub-cat" id="sub-cat">
+                <option value="">Select Sub Catagory</option>
+            </select>
+        </div>
+        <button id="createReport" class="btn btn-primary mt-5" onclick="showAnalysis()">Create Report</button>
+        <div class="cont"></div>
+    </center>
+    <script>
+        var arr = []
+        var map_ = {}
+        var cats = new Set()
+
+        function addProduct() {
+            const form = document.forms['product-form']
+            const formData = new FormData(form)
+            var obj = {}
+            for (const [k, v] of formData.entries()) {
+                obj[k] = v
+            }
+            if (!map_[obj.cat]) {
+                map_[obj.cat] = {}
+                cats.add(obj.cat)
+                var sel = document.querySelector("#cat")
+                const option = document.createElement("option")
+                option.value = obj.cat
+                option.innerText = obj.cat
+                sel.appendChild(option)
+            }
+            if (!map_[obj.cat][obj.subcat]) {
+                map_[obj.cat][obj.subcat] = []
+            } 
+            map_[obj.cat][obj.subcat].push(arr.length)
+            arr.push(obj)
+            document.querySelector(".pform").reset()
+        }
+
+        function changeSub(value) {
+            const rems = document.querySelectorAll(".sub-list")
+            for (let rem of rems) {
+                rem.remove()
+            }
+            var sel = document.querySelector("#sub-cat")
+            for (const k of Object.keys(map_[value])) {
+                var opt = document.createElement("option")
+                opt.value = k
+                opt.innerText = k
+                opt.className = "sub-list"
+                sel.appendChild(opt)
+            }
+        }
+
+        function showAnalysis() {
+            const cat = document.querySelector("#cat")
+            const sub_cat = document.querySelector("#sub-cat")
+            var obj = map_[cat.value][sub_cat.value]
+            if (!obj) {
+                return
+            }
+            console.log(obj)
+            const rems = document.querySelectorAll(".crd")
+            for (let rem of rems) {
+                rem.remove()
+            }
+            var cont = document.querySelector('.cont')
+            for (const index of obj) {
+                var ul = document.createElement('div')
+                ul.className = "crd"
+                for (const [k, v] of Object.entries(arr[index])) {
+                    var p = document.createElement('p')
+                    p.innerText = `${k}: ${v}`
+                    ul.appendChild(p)
+                }
+                cont.appendChild(ul)
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
