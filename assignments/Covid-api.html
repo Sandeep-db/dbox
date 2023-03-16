@@ -54,11 +54,86 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function () {
 
-            var gcountries = []
-            var country_codes = {}
-            var country_count = {}
+        var gcountries = []
+        var country_codes = {}
+        var country_count = {}
+
+        function displayNames(value) {
+            $("#s-country").attr("value", value)
+            document.querySelector(`option[value="${country_codes[value]}"]`).selected = true
+            getCovidCounts(country_codes[value])
+            removeElements()
+        }
+
+        function getCovidCounts(id) {
+            $("#active-cases").text("--")
+            $("#confirm-cases").text("--")
+            $("#death-cases").text("--")
+            $("#country-name").text("Loading ...")
+            if (id == "") {
+                return
+            }
+            let count = [0, 0, 0]
+            function setCount(count, name) {
+                console.log(count)
+                $("#active-cases").text(count[0])
+                $("#confirm-cases").text(count[1])
+                $("#death-cases").text(count[2])
+                $("#country-name").text(name)
+            }
+            if (country_count.hasOwnProperty(id)) {
+                setCount(country_count[id], $("#" + id).text())
+                return
+            }
+            const url = "https:api.covid19api.com/country/" + id
+            $.ajax({
+                url: url,
+                success: function (result) {
+                    const data = result
+                    if (!data.hasOwnProperty('length')) {
+                        $("#country-name").text("--")
+                        window.alert("Api has huge traffic")
+                        return
+                    }
+                    data.forEach(point => {
+                        count[0] += point.Active
+                        count[1] += point.Confirmed
+                        count[2] += point.Deaths
+                    })
+                    country_count[id] = count
+                    setCount(count, $("#" + id).text())
+                }
+            })
+        }
+
+        function removeElements() {
+            $(".list").empty()
+        }
+
+        function getSuggestions(event) {
+            removeElements()
+            let cities = gcountries
+            let val = event.target.value
+            let count = 0, id = null
+            for (let city of cities) {
+                if (city.toLowerCase().startsWith(val.toLowerCase()) && val != "") {
+                    let listItem = $("<li></li>")
+                    listItem.attr("class", "list-items")
+                    listItem.css("cursor", "pointer")
+                    listItem.attr("onclick", `displayNames('${city}')`)
+                    let word = "<b>" + city.slice(0, val.length) + "</b>" + city.slice(val.length)
+                    listItem.html(word)
+                    $(".list").append(listItem)
+                    ++count
+                    id = city
+                }
+            }
+        }
+
+        $("#s-country").keyup(getSuggestions)
+
+        $(document).ready(function () {
 
             function onLoad() {
                 $(".countries").change(function (event) {
@@ -85,80 +160,6 @@
 
             onLoad()
             window.onload = onLoad
-
-            function getCovidCounts(id) {
-                $("#active-cases").text("--")
-                $("#confirm-cases").text("--")
-                $("#death-cases").text("--")
-                $("#country-name").text("Loading ...")
-                if (id == "") {
-                    return
-                }
-                let count = [0, 0, 0]
-                function setCount(count, name) {
-                    console.log(count)
-                    $("#active-cases").text(count[0])
-                    $("#confirm-cases").text(count[1])
-                    $("#death-cases").text(count[2])
-                    $("#country-name").text(name)
-                }
-                if (country_count.hasOwnProperty(id)) {
-                    setCount(country_count[id], $("#" + id).text())
-                    return
-                }
-                const url = "https:api.covid19api.com/country/" + id
-                $.ajax({
-                    url: url,
-                    success: function (result) {
-                        const data = result
-                        if (!data.hasOwnProperty('length')) {
-                            $("#country-name").text("--")
-                            window.alert("Api has huge traffic")
-                            return
-                        }
-                        data.forEach(point => {
-                            count[0] += point.Active
-                            count[1] += point.Confirmed
-                            count[2] += point.Deaths
-                        })
-                        country_count[id] = count
-                        setCount(count, $("#" + id).text())
-                    }
-                })
-            }
-
-            function removeElements() {
-                $(".list").empty()
-            }
-
-            function displayNames(value) {
-                $("#s-country").attr("value", value)
-                document.querySelector(`option[value="${country_codes[value]}"]`).selected = true
-                getCovidCounts(country_codes[value])
-                removeElements()
-            }
-
-            function getSuggestions(event) {
-                removeElements()
-                let cities = gcountries
-                let val = event.target.value
-                let count = 0, id = null
-                for (let city of cities) {
-                    if (city.toLowerCase().startsWith(val.toLowerCase()) && val != "") {
-                        let listItem = $("<li></li>")
-                        listItem.attr("class", "list-items")
-                        listItem.css("cursor", "pointer")
-                        listItem.attr("onclick", `displayNames('${city}')`)
-                        let word = "<b>" + city.slice(0, val.length) + "</b>" + city.slice(val.length)
-                        listItem.html(word)
-                        $(".list").append(listItem)
-                        ++count
-                        id = city
-                    }
-                }
-            }
-
-            $("#s-country").keyup(getSuggestions)
 
         })
 
