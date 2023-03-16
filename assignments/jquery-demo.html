@@ -9,9 +9,27 @@
 </head>
 
 <body>
-
+    <center>
+        <p>Hello 1</p>
+        <p>Hello 2</p>
+        <p>Hello 3</p>
+        <p>Hello 4</p>
+        <p>Hello 5</p>
+        <p>Hello 6</p>
+        <p>Hello 7</p>
+        <p>Hello 8</p>
+        <p>Hello 9</p>
+        <button class="login-button">Toggle Para</button>
+    </center>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $(".login-button").click(function() {
+                $("p").toggle()
+            })
+        })
+    </script>
 </body>
 
 </html>
