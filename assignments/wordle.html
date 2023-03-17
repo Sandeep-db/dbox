@@ -68,8 +68,8 @@
     <script>
         let count = 0
         let index = 0
-        let words = ["troop", "first", "second", "hundred", "thousand"]
-        // let words = ["troop"]
+        // let words = ["troop", "first", "second", "hundred", "thousand"]
+        let words = ["troop"]
 
         function checkWord(word) {
             ++count
@@ -77,6 +77,12 @@
             let pos = []
             let map_ = new Map()
             let prev = Array(n).fill(0)
+            for (let i = 0; i < n; ++i) {
+                const box = document.querySelector("#box_" + i)
+                if (box.value == "") {
+                    return
+                }
+            }
             for (let i = 0; i < n; ++i) {
                 const box = document.querySelector("#box_" + i)
                 if (box.value == "") {
@@ -138,19 +144,35 @@
                     let value = event.target.value
                     if (value.length > 0) {
                         event.target.value = value[value.length - 1].toLowerCase()
+                        let id = event.target.id.split("_")[1]
+                        let vl = document.querySelector("#box_" + (+id + 1))
+                        if (vl) {
+                            vl.focus()
+                        } else {
+                            document.querySelector('.check').focus()
+                        }
                     }
                 })
                 fillBox.addEventListener("keypress", function (event) {
                     let value = event.target.value
                     if (value.length > 0) {
                         event.target.value = value[value.length - 1].toLowerCase()
+                        let id = event.target.id.split("_")[1]
+                        let vl = document.querySelector("#box_" + (+id + 1))
+                        if (vl) {
+                            vl.focus()
+                        } else {
+                            document.querySelector('.check').focus()
+                        }
                     }
                 })
                 fill_word.appendChild(fillBox)
             }
         }
-        index = Math.floor(Math.random() * words.length) 
+
+        index = Math.floor(Math.random() * words.length)
         fillBoxes()
+
     </script>
 </body>
 
