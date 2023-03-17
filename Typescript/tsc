@@ -1,0 +1,4 @@
+v=$1
+./node_modules/typescript/bin/tsc $1
+name=${v::-3}
+mv ./$name.js ./dist/
